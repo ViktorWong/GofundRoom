@@ -48,11 +48,11 @@ const CardCategories = (props) => {
                                 <Text numberOfLines={1} style={styles.locationHotel}>{props.hotel.location}</Text>
                             </View>
                         </View>
-                        <View >
+                        <View style={{alignItems: 'flex-end'}} >
                             <View>
-                                <Text style={styles.price}>{props.hotel.price} KMF</Text>
+                                <Text style={styles.price}>{props.hotel.price} $</Text>
                             </View>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', width: 100, justifyContent: 'space-between' }}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', width: 85, justifyContent: 'space-between' }}>
                                 <FontAwesome name="star" color={COLORS.orange} size={15} />
                                 <FontAwesome name="star" color={COLORS.orange} size={15} />
                                 <FontAwesome name="star" color={COLORS.orange} size={15} />
@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         letterSpacing: 1,
         color: COLORS.white,
+        textAlign: 'right'
     },
     cardOverlay: {
         height: 220,

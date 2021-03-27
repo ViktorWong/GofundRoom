@@ -33,7 +33,7 @@ const Card = (props) => {
     })
 
     return (
-        <TouchableOpacity activeOpacity={0.7}>
+        <TouchableHighlight style={{marginRight: 15, borderRadius: 13 }} underlayColor={COLORS.light} activeOpacity={0.8} onPress={props.onPress}>
             <Animated.View style={{ ...styles.card, transform: [{ scale }] }}>
                 <Animated.View style={{ ...styles.cardOverlay, opacity }} />
                 <Image
@@ -65,12 +65,12 @@ const Card = (props) => {
                                 <FontAwesome name="star" color={COLORS.orange} size={18} />
                                 <FontAwesome name="star" color={COLORS.orange} size={18} />
                                 <FontAwesome name="star" color={COLORS.orange} size={18} />
-                                <FontAwesome name="star" color={COLORS.primary} size={18} />
+                                <FontAwesome name="star" color={COLORS.secondary} size={18} />
                             </View>
                             <Text style={styles.reviews}>({props.hotel.review} reviews)</Text>
                         </View>
                         <View>
-                            <Text style={styles.price}>{props.hotel.price} KMF</Text>
+                            <Text style={styles.price}>{props.hotel.price} $</Text>
                         </View>
                     </View>
                 </View>
@@ -78,7 +78,7 @@ const Card = (props) => {
                     <Feather name="bookmark" size={25} color={COLORS.white} />
                 </View>
             </Animated.View>
-        </TouchableOpacity>
+        </TouchableHighlight>
     )
 }
 
@@ -87,7 +87,6 @@ const styles = StyleSheet.create({
         height: 290,
         width: cardWith,
         elevation: 8,
-        marginRight: 15,
         borderRadius: 13,
         backgroundColor: '#fff',
         position: 'relative'

@@ -1,4 +1,4 @@
-import React, { createRef } from 'react'
+import React from 'react'
 import {
     View,
     Text,
@@ -21,15 +21,15 @@ import hotels from '../Constants/Hotels'
 import Card from '../Components/Card'
 import CardCategories from '../Components/CardCategories'
 
-const categorie = ["All", "Popular", "Moroni", "Mustamudu", "Moheli"]
+LogBox.ignoreAllLogs()
+
+const categorie = ["All", "Popular", "Luxury", "Featured", "Top Hotels"]
 
 const { width } = Dimensions.get("screen")
 const cardWith = width / 1.6
 
 const scrollY = new Animated.Value(0)
 const scrollX = new Animated.Value(0)
-
-LogBox.ignoreAllLogs()
 
 class HomeScreen extends React.Component {
 
@@ -38,6 +38,12 @@ class HomeScreen extends React.Component {
         this.state = {
             selectedCategories: 0
         }
+    }
+
+    getHotelDetail(hotel) {
+        this.props.navigation.navigate('Detail', {
+            hotel: hotel
+        })
     }
 
     render() {
@@ -51,7 +57,7 @@ class HomeScreen extends React.Component {
         return (
             <View style={styles.container}>
 
-                <StatusBar translucent backgroundColor="rgba(0,0,0,0.04)" />
+                <StatusBar barStyle='dark-content' translucent backgroundColor="rgba(0,0,0,0.04)" />
 
                 <Animated.View style={{
                     elevation,
@@ -63,8 +69,8 @@ class HomeScreen extends React.Component {
                         <TouchableOpacity>
                             <View style={{ height: 20, justifyContent: 'space-between' }}>
                                 <View style={styles.burgerOne}></View>
-                                <View style={styles.burgerTwo}></View>
                                 <View style={styles.burgerThree}></View>
+                                <View style={styles.burgerTwo}></View>  
                             </View>
                         </TouchableOpacity>
                         <Image source={require('../Image/profil.jpg')} style={styles.image} />
@@ -130,10 +136,13 @@ class HomeScreen extends React.Component {
                             //paddingRight: cardWith/2-50
                         }}
                         data={hotels}
+                        scrollEventThrottle={16}
+                        bounces={false}
                         showsHorizontalScrollIndicator={false}
                         snapToInterval={cardWith}
+                        decelerationRate={0}
                         keyExtractor={(item) => item.id.toString()}
-                        renderItem={({ item, index }) => <Card hotel={item} index={index} scrollX={scrollX} />}
+                        renderItem={({ item, index }) => <Card onPress={() => this.getHotelDetail(item)} hotel={item} index={index} scrollX={scrollX} />}
                     />
 
                     {/** Categories Selectionnéé */}
@@ -201,13 +210,13 @@ const styles = StyleSheet.create({
     },
     burgerOne: {
         height: 3,
-        width: 35,
+        width: 28,
         backgroundColor: COLORS.grey,
         borderRadius: 2
     },
     burgerTwo: {
         height: 3,
-        width: 25,
+        width: 22,
         backgroundColor: COLORS.grey,
         borderRadius: 2,
     },
